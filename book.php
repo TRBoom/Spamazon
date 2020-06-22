@@ -19,6 +19,17 @@ if ($dbconnect->connect_error) {
 }
 
 ?>
+<?php
+$query = mysqli_query($dbconnect, "SELECT book.title FROM book
+										WHERE bookNo='".$_GET['ID']."' ")
+   or die (mysqli_error($dbconnect));
+   
+$bookInfo=mysqli_fetch_array($query);
+
+echo "<h1>{$bookInfo['title']}</h1>";
+
+?>
+
 
 <table border="1" align="center">
 <tr>
@@ -31,7 +42,8 @@ if ($dbconnect->connect_error) {
 
 $query = mysqli_query($dbconnect, "SELECT book.title, book.price,book.bookNo,author.authorNo, author.authorName FROM book 
 										INNER JOIN wroteBy ON wroteBy.bookNo=book.bookNo
-										INNER JOIN author ON author.authorNo=wroteBy.authorNo")
+										INNER JOIN author ON author.authorNo=wroteBy.authorNo
+										WHERE book.bookNo='".$_GET['ID']."' ")
    or die (mysqli_error($dbconnect));
 
 while ($row = mysqli_fetch_array($query)) {

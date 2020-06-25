@@ -5,21 +5,9 @@ body {background-color:#00021b;color:white;}
 	a {color:white}
 </style>
 <body>
+
 <?php
-
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$db = "spamazon";
-
-$dbconnect=mysqli_connect($hostname,$username,$password,$db);
-
-if ($dbconnect->connect_error) {
-  die("Database connection failed: " . $dbconnect->connect_error);
-}
-
-?>
-<?php
+require_once "config.php";
 $query = mysqli_query($dbconnect, "SELECT authorName,bio FROM author
 										WHERE authorNo='".$_GET['ID']."' ")
    or die (mysqli_error($dbconnect));

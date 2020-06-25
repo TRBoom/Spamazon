@@ -5,20 +5,7 @@ body {background-color:#00021b;color:white;}
 	a {color:white}
 </style>
 <body>
-<?php
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$db = "spamazon";
-
-$dbconnect=mysqli_connect($hostname,$username,$password,$db);
-
-if ($dbconnect->connect_error) {
-  die("Database connection failed: " . $dbconnect->connect_error);
-}
-
-?>
 
 <table border="1" align="center">
 <tr>
@@ -28,7 +15,7 @@ if ($dbconnect->connect_error) {
 </tr>
 
 <?php
-
+require_once "config.php";
 $query = mysqli_query($dbconnect, "SELECT book.title, book.price,book.bookNo,author.authorNo, author.authorName FROM book 
 										INNER JOIN wroteBy ON wroteBy.bookNo=book.bookNo
 										INNER JOIN author ON author.authorNo=wroteBy.authorNo")
